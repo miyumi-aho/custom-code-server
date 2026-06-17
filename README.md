@@ -1,4 +1,4 @@
-日本語 | [English](README.md)
+日本語 | [English](README.en.md)
 
 # カスタム [code-server](https://github.com/coder/code-server) セットアップ
 
