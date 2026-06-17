@@ -1,0 +1,34 @@
+# Load NVM (we have to add this back since COPY overwrote the file inside Dockerfile!)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Function to show git branch with a cute flower symbol (✿)
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [✿ \1]/'
+}
+
+# Pastel inspired colors!
+# Light Blue: 117, Light Pink: 218, White: 255
+PS1="\[\e[38;5;117m\][ \@ ] \[\e[38;5;218m\]/ᐠ˵- ⩊ -˵マ \[\e[38;5;255m\]\$(whoami)\[\e[38;5;218m\]: ✦ \w \[\e[38;5;117m\]\$(parse_git_branch) \[\e[38;5;255m\]\$\[\e[0m\] "
+
+# --- Cute & Helpful Extras! ---
+show_motivation() {
+    local messages=(
+        "> べ、別にあなたのコードのことなんて気にしてないんだから！シンタックスエラーだけ出さないようにしなさいよ！(˶˃⤙˂˶)\n"
+        "> まあまあ、ちゃんとできてる…みたいね。でも調子に乗らないの！レーズンみたいに干からびちゃう前に、お水くらい飲みなさいよ！(⸝⸝⩌⸝⸝⩌⸝⸝)\n"
+        "> 詰まったら、とりあえず深呼吸しなさいよ。別に心配してるわけじゃないんだから…さっさとバグを直すの！૮₍ ˶˃ ⤙ ˂˶ ₎ა\n"
+        "> コードがちょっと散らかりすぎよ…ほら、私が…いや、あなたがちゃんと整理しなさいよ！頑張って！(//Ò///Ó//)\n"
+        "> ずっと画面を見つめないの！目が乾いちゃうでしょ！ちょっとは目を逸らしなさいよ…別に目が潰れてもいいなんて思ってないんだから！(˵ ᓀ ‸ᓀ ˵)\n"
+        "> また保存するの忘れたんでしょ？！バカ！コード消えたら私のところに泣きついてこないの！(>/////< \" )\n"
+        "> 困ったら help って言ってみなさいよ！…別に手伝ってあげるわけじゃないんだから、ただ立ち尽くして時間を無駄にしてほしくないだけよ！(⸝⸝⸝╸▵╺⸝⸝⸝)\n"
+        "> コードはちゃんとコミットしなさいよ！ちゃんとした開発者なら進捗を失ったりしないわ…別にあなたのコミット履歴を追いかけてるわけじゃないんだから！(⸝⸝⩌ ⤙ ⩌⸝⸝)\n"
+    )
+    local rand=$[$RANDOM % ${#messages[@]}]
+    echo -e "\e[38;5;218m${messages[$rand]}\e[0m"
+}
+show_motivation
+
+# Cute and helpful shortcuts (aliases)!
+alias python="python3"
+

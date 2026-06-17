@@ -1,0 +1,35 @@
+# Load NVM (we have to add this back since COPY overwrote the file inside Dockerfile!)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Function to show git branch with a cute flower symbol (✿)
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [✿ \1]/'
+}
+
+# Pastel inspired colors!
+# Light Blue: 117, Light Pink: 218, White: 255
+# We replaced \u with \$(whoami) so it uses our cute hack!
+PS1="\[\e[38;5;117m\][ \@ ] \[\e[38;5;218m\]/ᐠ˵- ⩊ -˵マ \[\e[38;5;255m\]\$(whoami)\[\e[38;5;218m\]: ✦ \w \[\e[38;5;117m\]\$(parse_git_branch) \[\e[38;5;255m\]\$\[\e[0m\] "
+
+# --- Cute & Helpful Extras! ---
+show_motivation() {
+    local messages=(
+        "> B-baka! Don't think I'm doing this because I care about your code or anything! Just make sure you don't get any syntax errors, okay?! (˶˃⤙˂˶)\n"
+        "> You're doing... I guess okay. But don't let it go to your head! Drink some water before you dry up like a raisin! (⸝⸝⩌⸝⸝⩌⸝⸝)\n"
+        "> If you get stuck, just take a deep breath. It's not like I'm worried about you or anything... just solve the bug already! ૮₍ ˶˃ ⤙ ˂˶ ₎ა\n"
+        "> Your code is looking a little messy... here, let me... I mean, you should clean it up! Ganbatte! (//Ò///Ó//)\n"
+        "> Don't just stare at the screen! Your eyes are going to dry out! Look away for a bit... it's not like I want you to go blind or anything! (˵ ᓀ ‸ᓀ ˵)\n"
+        "> You forgot to save your work again, didn't you?! Baka! If you lose your code, don't come crying to me! (>/////< \" )\n"
+        "> If you need help, just ask! ...I mean, I'm not offering to help you, I just don't want you to waste time being stuck! (⸝⸝⸝╸▵╺⸝⸝⸝)\n"
+        "> Make sure you commit your code properly! A good developer doesn't lose their progress... not that I'm keeping track of your commits or anything! (⸝⸝⩌ ⤙ ⩌⸝⸝)\n"
+    )
+    local rand=$[$RANDOM % ${#messages[@]}]
+    echo -e "\e[38;5;218m${messages[$rand]}\e[0m"
+}
+show_motivation
+
+# Cute and helpful shortcuts (aliases)!
+alias python="python3"
+

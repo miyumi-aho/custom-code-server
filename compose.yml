@@ -1,0 +1,21 @@
+services:
+  code-server:
+    build: 
+      context: .
+      args:
+        USERNAME: miyumi                    # This will show in your terminal prompt
+        LANG: ja                            # Change to 'ja' for Japanese messages, or 'en' for English!
+    container_name: code
+    ports:
+      - "8443:8080"
+    volumes:
+      - ./workspace:/home/coder/project     # Main project workspace directory
+      - ./.config:/home/coder/.config       # Stores code-server configuration files
+      - ./.local:/home/coder/.local         # Stores local user data and extensions
+      - ./.ssh:/home/coder/.ssh             # Persists SSH keys and configs for remote access and Git operations
+    environment:
+      - AUTH=none                           # Change 'passowrd' to require/enable login in code-server
+      # - PASSWORD=SuperSecretPasswrod321!  # If you set AUTH=password, you MUST set a PASSWORD too! You may use '.env` file for this.
+      - TZ=Asia/Tokyo
+    restart: unless-stopped
+
