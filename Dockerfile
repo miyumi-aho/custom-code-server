@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gosu \
     fonts-noto-cjk \
+    fonts-firacode \
     jq \
     && rm -rf /var/lib/apt/lists/*
 
